@@ -7,9 +7,10 @@ import struct
 import socket
 import datetime
 import errno
+
+from sendfile import sendfile
 from fdfs_client.fdfs_protol import *
 from fdfs_client.connection import *
-from fdfs_client.sendfile import *
 from fdfs_client.exceptions import (
     FDFSError,
     ConnectionError,
@@ -52,8 +53,9 @@ def tcp_send_file_ex(conn, filename, buffer_size = 4096):
     @filename: string
     @return long, sended size
     '''
-    if 'linux' not in sys.platform.lower():
-        raise DataError('[-] Error: \'sendfile\' system call only available on linux.')
+    platform_info = sys.platform.lower()
+    if 'linux' not in platform_info and 'freebsd' not in platform_info:
+        raise DataError('[-] Error: \'sendfile\' system call only available on linux or freebsd.')
     nbytes = 0
     offset = 0
     sock_fd = conn.get_sock().fileno()

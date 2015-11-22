@@ -22,15 +22,17 @@ sdict = {
     'keywords' : ['Fastdfs', 'Distribute File System'],
     'license' : 'GPLV3',
     'packages' : ['fdfs_client'],
+    'install_requires': [
+        'pysendfile>=2.0.0',
+    ],
     'classifiers' : [
         'Development Status :: 1 - Production/Beta',
         'Environment :: Console',
         'Intended Audience :: Developers',
         'License :: GPLV3',
         'Operating System :: OS Independent',
-        'Programming Language :: Python'],
-    'ext_modules' : [Extension('fdfs_client.sendfile',
-                             sources = ['fdfs_client/sendfilemodule.c'])],
+        'Programming Language :: Python'
+    ],
 }
 
 
